@@ -21,7 +21,6 @@ function ageInSeconds () {
 
 document.getElementById("submit").addEventListener("click", function (event) {
   // console.log(event);
-  console.log(inputValue);
   ageInSeconds();
 })
 
@@ -34,3 +33,5 @@ document.addEventListener("keydown", function (event) {
 //to do: function to verify there is data in input and alert message if no data. if there is data, run ageInSeconds.
 
 //todo: make it so they can enter their birthday and calculate seconds from the day of birth instead of year
+
+//put date in as parameter when instantiating new date ("March 11, 1976"), use that to calculate ms from today's date and then multiply the difference by 1000.
