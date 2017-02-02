@@ -1,37 +1,35 @@
-
-function ageInSeconds () {
-  const secondsPerMinute = 60;
-  const minutesPerHour = 60;
-  const hoursPerDay = 24;
-  const daysPerYear = 365;
+function verify() {
   let inputYears = document.getElementById("age");
-  let outputAge = document.getElementById("output");
   let inputValue = inputYears.value;
   console.log("the input value is " + inputValue);
+  let userBday = new Date(inputValue);
+  if (userBday == "Invalid Date") {
+    alert("please type a birthday in the input space");
+  } else {
+    console.log(userBday);
+    ageInSeconds(userBday);
+  }
+}
+
+
+function ageInSeconds (userBday) {
+  let outputAge = document.getElementById("output");
   let todaysDate = new Date();
-  let todaysYear = todaysDate.getFullYear();
-  console.log("this year is" + todaysYear);
-  let yourAge = todaysYear - inputValue;
-  console.log("your age is " + yourAge);
-  let ageCalculationValue = yourAge * secondsPerMinute * minutesPerHour * hoursPerDay * daysPerYear;
-  console.log("you've been alive this many seconds: " + ageCalculationValue);
-  ageCalculationValue = ageCalculationValue.toLocaleString();
-  outputAge.innerHTML = "You have lived " + ageCalculationValue + " seconds!";
+  console.log(todaysDate);
+  let difference = todaysDate - userBday;
+  console.log(difference);
+  let diffInSecs = Math.round(difference/1000);
+  console.log(diffInSecs);
+  diffInSecs = diffInSecs.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
+  outputAge.innerHTML = "You have lived " + diffInSecs + " seconds!";
 }
 
 document.getElementById("submit").addEventListener("click", function (event) {
-  // console.log(event);
-  ageInSeconds();
+  verify();
 })
 
 document.addEventListener("keydown", function (event) {
   if (event.keyCode === 13) {
-    ageInSeconds();
+    verify();
   }
 })
-
-//to do: function to verify there is data in input and alert message if no data. if there is data, run ageInSeconds.
-
-//todo: make it so they can enter their birthday and calculate seconds from the day of birth instead of year
-
-//put date in as parameter when instantiating new date ("March 11, 1976"), use that to calculate ms from today's date and then multiply the difference by 1000.
